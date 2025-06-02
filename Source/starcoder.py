@@ -20,20 +20,21 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 
 # ✅ 4. 테스트용 응답 함수 (텍스트 프롬프트 입력 → 텍스트 출력)
+#temperature, top_p 추가
 def generate_response(prompt: str):
     inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
     with torch.no_grad():
-        outputs = model.generate(**inputs, max_new_tokens=512)
+        outputs = model.generate(**inputs, max_new_tokens=512, temperature=0.1, top_p=0.8)
     return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
 # ✅ 5. 테스트용 주석 생성 함수 (코드 입력 → 주석 붙은 코드 출력)
 def annotate_code_with_comments(code: str):
-    prompt = f"다음은 파이썬 코드입니다. 각 줄에 주석을 달아주세요.\n\n{code}"
+    prompt = f"다음은 파이썬 코드입니다. 각 줄에 주석을 달아주세요. 반복된 답변은 출력하지 말아주세요.\n\n{code}"
     return generate_response(prompt)
 
 # ✅ 6. 테스트용 코드 수정 함수 (코드 입력 → 수정 된 코드 출력)
 def modify_code(code: str):
-    prompt = f"다음은 파이썬 코드입니다. 코드에 오류가 있으면 수정해주세요.\n\n{code}"
+    prompt = f"다음은 파이썬 코드입니다. 코드에 오류가 있으면 수정해주세요. 반복된 답변은 출력하지 말아주세요.\n\n{code}"
     return generate_response(prompt)
 
 
@@ -51,6 +52,7 @@ if __name__ == "__main__":
         elif prompt.lower() in ["생성"]:
             print('\n✏️ 원하는 코드 형태를 적어주세요.')
             code_type = input("")
+            code_type = f"다음은 원하는 파이썬 코드에 대한 설명입니다. 적절한 파이썬 코드를 만들어 주세요. 반복된 답변은 출력하지 말아주세요.\n\n{code_type}"
             response = generate_response(code_type)
 
         elif prompt.lower() in ["주석"]:
