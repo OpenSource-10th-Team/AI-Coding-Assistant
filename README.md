@@ -108,7 +108,10 @@ Grammar check completed. Output saved to output.txt
 ```
 
 ---
-
+## COLAB
+you can test our program with entering this [colab link](https://colab.research.google.com/drive/1qrpBMnsv9G6QOem_QWv-0f-6uocGMTwJ?usp=sharing) and copy notebook.
+    
+    
 ## License
 
 This project uses open-source models and tools. Please refer to the individual model licenses for full terms:
