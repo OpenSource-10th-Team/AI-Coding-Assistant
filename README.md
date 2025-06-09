@@ -64,13 +64,13 @@ pip install torch transformers accelerate
 ---
 
 ## Usage
-
-1. ai_model_deepseek.py
-
+examples
+ 
+### create
 Run the assistant:
 
 ```bash
-python ai_model_deepseek.py
+python main.py
 ```
 
 You will be prompted to choose one of the following actions:
@@ -82,6 +82,8 @@ You will be prompted to choose one of the following actions:
 
 - '종료' – exit the program
 
+- '디버그' – create debugging files. 
+
 Example:
 
 ```text
@@ -90,32 +92,15 @@ Example:
 정수를 입력받아 소수인지 판별하는 코드를 만들어줘
 ```
 
-2. Debug.py
-
-Run the assistant:
-
-```bash
-python Debug.py
-```
-Usage steps:
-
-- You can input your code line by line.
-
-- Enter '!STOP' on a new line to finish inputting your code.
-
-- Enter '!CHECK' at any time to print the current input code.
-
-- After inputting your code, the tool runs pylint to detect issues and suggests fixes by adding comments directly to your code lines.
-
-- The corrected code and pylint output are saved into output.txt and pylint_output.txt respectively.
+### debug
 
 Example:
 
 ```text
-💬 코드 입력:
+💬 코드 입력:        #or .py file path
 def f(x):
   return x > 1
-!STOP
+End Code
 
 💬 결과:
 Checking code grammar...
