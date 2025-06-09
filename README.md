@@ -1,1 +1,133 @@
-# AI-Coding-Assistant
+# AI-Coding-Assistant (ACA)
+
+---
+
+## Abstract
+
+AI-Coding-Assistant (ACA) guides you toward making your code better and better.  
+It offers three main features:
+
+1. Generates code based on algorithm descriptions.  
+2. Detects and corrects errors in your code.  
+3. Provides helpful advice to improve your coding skills.
+
+---
+
+## Model
+
+ACA uses the [DeepSeek Coder 1.3B Instruct](https://huggingface.co/deepseek-ai/deepseek-coder-1.3b-instruct) model,  
+an instruction-tuned open-source code generation model developed by [DeepSeek AI](https://huggingface.co/deepseek-ai).  
+DeepSeek Coder is instruction-tuned, meaning it has been specifically trained to follow human instructions,  
+making it well-suited for tasks like code modification, explanation, and annotation.
+
+---
+
+## Requirements
+
+### Software
+
+- Python ≥ 3.9  
+- PyTorch ≥ 2.0  
+- `transformers` (by Hugging Face)  
+- `accelerate` (optional, for faster performance)  
+
+### Hardware
+
+- GPU with at least 8GB of VRAM (e.g., NVIDIA RTX 3060 or higher recommended)  
+- CPU is also supported but slower
+
+---
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/OpenSource-10th-Team/AI-Coding-Assistant.git
+cd AI-Coding-Assistant
+```
+
+2. install Python dependencies:
+
+```bash
+pip install torch transformers accelerate
+```
+
+> **Additional Info:**  
+> - The default installation of 'pipe install torch' is the CPU version.  
+> - For GPU version installation, check the [PyTorch official site] (https://pytorch.org/) for commands that match the CUDA version.  
+> - For example: In CUDA 11.8 environments
+> ```bash
+> pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+> ```
+
+---
+
+## Usage
+
+1. ai_model_deepseek.py
+
+Run the assistant:
+
+```bash
+python ai_model_deepseek.py
+```
+
+You will be prompted to choose one of the following actions:
+- '생성' – generate code from a description
+
+- '수정' – fix or improve your code
+
+- '주석' – annotate code with line-by-line comments
+
+- '종료' – exit the program
+
+Example:
+
+```text
+💬 Prompt: 생성
+✏️ 원하는 코드에 대한 설명을 입력하세요.
+정수를 입력받아 소수인지 판별하는 코드를 만들어줘
+```
+
+2. Debug.py
+
+Run the assistant:
+
+```bash
+python Debug.py
+```
+Usage steps:
+
+- You can input your code line by line.
+
+- Enter '!STOP' on a new line to finish inputting your code.
+
+- Enter '!CHECK' at any time to print the current input code.
+
+- After inputting your code, the tool runs pylint to detect issues and suggests fixes by adding comments directly to your code lines.
+
+- The corrected code and pylint output are saved into output.txt and pylint_output.txt respectively.
+
+Example:
+
+```text
+💬 코드 입력:
+def f(x):
+  return x > 1
+!STOP
+
+💬 결과:
+Checking code grammar...
+Grammar check completed. Output saved to output.txt
+```
+
+---
+
+## License
+
+This project uses open-source models and tools. Please refer to the individual model licenses for full terms:
+
+- DeepSeek Coder License
+
+All original code in this repository is under the MIT License unless otherwise stated.
